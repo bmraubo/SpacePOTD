@@ -23,10 +23,10 @@ class TwitterConnect:
 
     def post_text(self, text):
         response = self.client.create_tweet(text=text)
-        return response.data["text"]
+        return response.data
 
     def post_text_with_image(self, text, image_path):
         pass
 
     def delete_tweet(self, tweet_id):
-        pass
+        return self.client.delete_tweet(tweet_id)
