@@ -23,5 +23,8 @@ class TwitterConnect:
     def post_text_with_image(self, text, image_path):
         self.client.create_tweet()
 
+    def upload_media(self, file_name, file):
+        return self.client.media_upload(filename=file_name, file=file)
+
     def delete_tweet(self, tweet_id):
         return self.client.destroy_status(tweet_id)
