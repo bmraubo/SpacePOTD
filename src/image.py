@@ -13,7 +13,7 @@ class Image:
     def fetch_image(self):
         try:
             response = requests.get(self.url)
-            self.image = BytesIO(response.content)
+            self.file = BytesIO(response.content)
             self.ready = True
         except:
             print("Failed to fetch image")

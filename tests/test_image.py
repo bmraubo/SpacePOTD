@@ -26,7 +26,7 @@ def test_image_is_constructed():
 def test_can_fetch_image():
     image = Image(MOCK_NASA_API_DATA)
     image.fetch_image()
-    assert image.image != None
+    assert image.file != None
     assert image.ready == True
 
 def test_has_been_posted():

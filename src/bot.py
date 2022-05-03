@@ -1,6 +1,4 @@
-import requests
 import time
-from io import BytesIO
 from .image import Image
 
 
@@ -32,18 +30,12 @@ class Bot:
 
     def upload_media(self, image):
         media_upload_response = self.twitter_connect.upload_media(
-            image.name, image.image
+            image.name, image.file
         )
         return media_upload_response.media_id
 
     def set_last_posted_image_date(self, posted_image_date):
         self.last_posted_image_date = posted_image_date
-
-    def posted_on_date(self, new_date):
-        try:
-            return self.last_posted_image_date == new_date
-        except AttributeError:
-            return False
 
     def wait(self):
         print("Waiting")
