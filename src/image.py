@@ -19,4 +19,8 @@ class Image:
             print("Failed to fetch image")
 
     def has_been_posted(self, last_posted_image_date):
-        return False if last_posted_image_date == None else self.date == last_posted_image_date
+        return (
+            False
+            if last_posted_image_date == None
+            else self.date == last_posted_image_date
+        )
