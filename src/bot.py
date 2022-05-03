@@ -9,6 +9,16 @@ class Bot:
         self.nasa_connect = nasa_connect
         self.twitter_connect = twitter_connect
 
+    def get_image_data(self):
+        print("Contacting NASA API")
+        return self.nasa_connect.get_data()
+
+    def upload_media(self, image):
+        media_upload_response = self.twitter_connect.upload_media(
+            image.name, image.file
+        )
+        return media_upload_response.media_id
+
     def post_image(self, image):
         print("New Image - Posting")
         image.fetch_image()
@@ -23,16 +33,6 @@ class Bot:
             return True
         else:
             return False
-
-    def get_image_data(self):
-        print("Contacting NASA API")
-        return self.nasa_connect.get_data()
-
-    def upload_media(self, image):
-        media_upload_response = self.twitter_connect.upload_media(
-            image.name, image.file
-        )
-        return media_upload_response.media_id
 
     def set_last_posted_image_date(self, posted_image_date):
         self.last_posted_image_date = posted_image_date
