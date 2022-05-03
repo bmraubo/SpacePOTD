@@ -1,6 +1,7 @@
 import requests
 import time
 from io import BytesIO
+from .image import Image
 
 
 class Bot:
@@ -10,27 +11,16 @@ class Bot:
         self.nasa_connect = nasa_connect
         self.twitter_connect = twitter_connect
 
-    def prepare_image(self, image_url):
-        try:
-            response = requests.get(image_url)
-            self.image = BytesIO(response.content)
-            self.image_ready = True
-        except:
-            self.image_ready = False
-
-    def post_image(self, data):
-        image_name = data["title"]
-        image_url = data["url"]
-        date = data["date"]
+    def post_image(self, image):
         print("New Image - Posting")
-        self.prepare_image(image_url)
-        if self.image_ready:
-            media_id = self.upload_media(image_name)
+        image.fetch_image()
+        if image.ready:
+            media_id = self.upload_media(image)
             post_response = self.twitter_connect.post_text_with_image(
-                image_name, media_id
+                image.name, media_id
             )
             self.last_post_id = post_response._json["id"]
-            self.set_last_posted_image_date(date)
+            self.set_last_posted_image_date(image.date)
             print("Image Posted")
             return True
         else:
@@ -40,9 +30,9 @@ class Bot:
         print("Contacting NASA API")
         return self.nasa_connect.get_data()
 
-    def upload_media(self, image_name):
+    def upload_media(self, image):
         media_upload_response = self.twitter_connect.upload_media(
-            image_name, self.image
+            image.name, image.image
         )
         return media_upload_response.media_id
 
@@ -63,11 +53,9 @@ class Bot:
         print("Bot is starting")
         while True:
             nasa_api_response = self.get_image_data()
-            print(
-                f"NASA API Response:\nTitle:{nasa_api_response['title']}\nDate:{nasa_api_response['date']}\nUrl:{nasa_api_response['url']}"
-            )
-            if not self.posted_on_date(nasa_api_response["date"]):
-                self.post_image(nasa_api_response)
+            image = Image(nasa_api_response)
+            if not image.has_been_posted(self.last_posted_image_date):
+                self.post_image(image)
                 self.wait()
             else:
                 print("This image has already been posted")

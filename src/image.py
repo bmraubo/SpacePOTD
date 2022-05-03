@@ -3,7 +3,7 @@ from io import BytesIO
 
 
 class Image:
-    image_ready = False
+    ready = False
 
     def __init__(self, nasa_api_data):
         self.name = nasa_api_data["title"]
@@ -14,6 +14,9 @@ class Image:
         try:
             response = requests.get(self.url)
             self.image = BytesIO(response.content)
-            self.image_ready = True
+            self.ready = True
         except:
             print("Failed to fetch image")
+
+    def has_been_posted(self, last_posted_image_date):
+        return False if last_posted_image_date == None else self.date == last_posted_image_date

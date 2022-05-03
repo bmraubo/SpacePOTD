@@ -27,4 +27,11 @@ def test_can_fetch_image():
     image = Image(MOCK_NASA_API_DATA)
     image.fetch_image()
     assert image.image != None
-    assert image.image_ready == True
+    assert image.ready == True
+
+def test_has_been_posted():
+    last_posted_image_date = "2022-05-02"
+    image = Image(MOCK_NASA_API_DATA)
+    posted = image.has_been_posted(last_posted_image_date)
+    assert posted == True
+
