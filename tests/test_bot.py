@@ -15,12 +15,15 @@ MOCK_NASA_API_DATA = {
     "url": "https://apod.nasa.gov/apod/image/2205/PartialEclipse_Andrada_960.jpg",
 }
 
-
-def test_bot_can_post_an_image():
+def set_up_bot():
     nasa_api_client = MockNasaApiClient()
     nasa_connect = NasaConnect(nasa_api_client)
     twitter_connect = TwitterConnect()
     bot = Bot(nasa_connect, twitter_connect)
+    return bot
+
+def test_bot_can_post_an_image():
+    bot = set_up_bot()
     image = Image(bot.nasa_connect.get_data())
     image_posted = bot.post_image(image)
     assert image_posted == True
