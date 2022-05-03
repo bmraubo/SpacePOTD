@@ -6,7 +6,7 @@ class Image:
     ready = False
 
     def __init__(self, nasa_api_data):
-        self.name = nasa_api_data["title"]
+        self.name = nasa_api_data["name"]
         self.date = nasa_api_data["date"]
         self.url = nasa_api_data["url"]
 
