@@ -22,5 +22,4 @@ class Storage:
 
     def add_image(self, image: Image):
         self.data.append(image.build_json())
-        print(self.data)
         self.write_to_history_file()
