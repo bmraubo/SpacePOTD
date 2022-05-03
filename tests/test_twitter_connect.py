@@ -40,5 +40,6 @@ def test_can_post_to_twitter_with_media():
     media_information = post_response._json["entities"]["media"][0]
 
     assert media_id == media_information["id"]
+    assert text in post_response._json["text"]
     twitter_connect.delete_tweet(post_response._json["id"])
 
