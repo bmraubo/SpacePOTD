@@ -19,7 +19,7 @@ class TwitterConnect:
 
     def post_text(self, text):
         response = self.client.update_status(status=text)
-        return response._json
+        return response
 
     def post_text_with_image(self, text, media_id):
         print(media_id)
