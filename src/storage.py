@@ -2,8 +2,8 @@ import typing
 import json
 from src.image import Image
 
-class Storage:
 
+class Storage:
     def __init__(self, history_file):
         self.history_file = history_file
         self.data = self.open_history_file()
@@ -16,7 +16,7 @@ class Storage:
         with open(self.history_file, "w") as file:
             data_string = json.dumps(self.data)
             file.write(data_string)
-    
+
     def get_last_image(self) -> Image:
         return Image(self.data[-1])
 

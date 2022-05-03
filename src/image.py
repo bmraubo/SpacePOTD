@@ -26,8 +26,4 @@ class Image:
         )
 
     def build_json(self):
-        return {
-            "name": self.name,
-            "date": self.date,
-            "url": self.url
-        }
+        return {"name": self.name, "date": self.date, "url": self.url}
