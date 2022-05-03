@@ -12,21 +12,16 @@ class TwitterConnect:
         self.client = self.create_client()
 
     def create_client(self):
-        client = tweepy.Client(
-            bearer_token=self.bearer_token,
-            consumer_key=self.consumer_key,
-            consumer_secret=self.consumer_secret,
-            access_token=self.access_token,
-            access_token_secret=self.access_token_secret
-        )
+        auth = tweepy.OAuth1UserHandler(self.consumer_key,self.consumer_secret,self.access_token, self.access_token_secret)
+        client = tweepy.API(auth)
         return client
 
     def post_text(self, text):
-        response = self.client.create_tweet(text=text)
-        return response.data
+        response = self.client.update_status(status=text)
+        return response._json
 
     def post_text_with_image(self, text, image_path):
-        pass
+        self.client.create_tweet()
 
     def delete_tweet(self, tweet_id):
-        return self.client.delete_tweet(tweet_id)
+        return self.client.destroy_status(tweet_id)
