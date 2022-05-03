@@ -21,6 +21,7 @@ class Bot:
         image_name = data["title"]
         image_url = data["url"]
         date = data["date"]
+        print("New Image - Posting")
         self.prepare_image(image_url)
         if self.image_ready:
             media_upload_response = self.twitter_connect.upload_media(image_name, self.image)
@@ -28,11 +29,13 @@ class Bot:
             post_response = self.twitter_connect.post_text_with_image(image_name, media_id)
             self.last_post_id = post_response._json["id"]
             self.set_last_posted_image_date(date)
+            print("Image Posted")
             return True
         else:
             return False
 
     def get_image_data(self):
+        print("Contacting NASA API")
         return self.nasa_connect.get_data()
 
     def set_last_posted_image_date(self, posted_image_date):
@@ -44,24 +47,19 @@ class Bot:
         except AttributeError:
             return False
 
-
     def wait(self):
+        print("Waiting")
         time.sleep(self.wait_time)
     
     def start(self):
         print("Bot is starting")
         while True:
-            print("Contacting NASA API")
             nasa_api_response = self.get_image_data()
             print(f"NASA API Response:\nTitle:{nasa_api_response['title']}\nDate:{nasa_api_response['date']}\nUrl:{nasa_api_response['url']}")
             if not self.posted_on_date(nasa_api_response["date"]):
-                print("New Image - Posting")
                 self.post_image(nasa_api_response)
-                print("Image Posted")
-                print("Waiting")
                 self.wait()
             else:
                 print("This image has already been posted")
-                print("Waiting")
                 self.wait()
 
