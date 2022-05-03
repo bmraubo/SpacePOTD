@@ -9,7 +9,7 @@ def set_up_image():
     data = {
         "name": "Partial Solar Eclipse over Argentina",
         "date": "2022-05-02",
-        "url": "https://apod.nasa.gov/apod/image/2205/PartialEclipse_Andrada_960.jpg",
+        "url": "www.another-example.com",
     }
     image = Image(data)
     return image
@@ -42,8 +42,5 @@ def test_can_write_to_history_file():
     last_image = storage.get_last_image()
     assert last_image.name == "Partial Solar Eclipse over Argentina"
     assert last_image.date == "2022-05-02"
-    assert (
-        last_image.url
-        == "https://apod.nasa.gov/apod/image/2205/PartialEclipse_Andrada_960.jpg"
-    )
+    assert last_image.url == "www.another-example.com"
     reset_history_file()
