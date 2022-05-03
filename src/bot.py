@@ -1,5 +1,7 @@
 import time
 from .image import Image
+from src.storage import Storage
+from src.settings import HISTORY_FILE
 
 
 class Bot:
@@ -8,6 +10,7 @@ class Bot:
     def __init__(self, nasa_connect, twitter_connect):
         self.nasa_connect = nasa_connect
         self.twitter_connect = twitter_connect
+        self.storage = Storage(HISTORY_FILE)
 
     def get_image_data(self):
         print("Contacting NASA API")
@@ -28,14 +31,11 @@ class Bot:
                 image.name, media_id
             )
             self.last_post_id = post_response._json["id"]
-            self.set_last_posted_image_date(image.date)
             print("Image Posted")
+            self.storage.add_image(image)
             return True
         else:
             return False
-
-    def set_last_posted_image_date(self, posted_image_date):
-        self.last_posted_image_date = posted_image_date
 
     def wait(self):
         print("Waiting")
@@ -46,7 +46,8 @@ class Bot:
         while True:
             nasa_api_response = self.get_image_data()
             image = Image(nasa_api_response)
-            if not image.has_been_posted(self.last_posted_image_date):
+            last_image = self.storage.get_last_image()
+            if not image.has_been_posted(last_image.date):
                 self.post_image(image)
                 self.wait()
             else:
