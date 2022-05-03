@@ -10,6 +10,7 @@ class NasaConnect:
         response_json = self.api_client.get_data()
         return {
             "title": response_json["title"],
+            "date": response_json["date"],
             "url": response_json["url"]
         }
         

@@ -1,6 +1,5 @@
-from statistics import median
 import tweepy
-from .settings import TWITTER_BEARER_TOKEN, TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET
+from src.settings import TWITTER_BEARER_TOKEN, TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET
 
 class TwitterConnect:
     consumer_key = TWITTER_CONSUMER_KEY 
@@ -22,7 +21,6 @@ class TwitterConnect:
         return response
 
     def post_text_with_image(self, text, media_id):
-        print(media_id)
         return self.client.update_status(status=text, media_ids=[str(media_id)])
 
     def upload_media(self, file_name, file):
