@@ -36,7 +36,6 @@ def test_can_get_last_image_data():
 
 
 def test_can_write_to_history_file():
-    history_file = "tests/test_history.txt"
     image = set_up_image()
     storage = Storage(history_file)
     storage.add_image(image)
