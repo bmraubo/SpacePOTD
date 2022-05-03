@@ -1,8 +1,15 @@
 import tweepy
-from src.settings import TWITTER_BEARER_TOKEN, TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET
+from src.settings import (
+    TWITTER_BEARER_TOKEN,
+    TWITTER_CONSUMER_KEY,
+    TWITTER_CONSUMER_SECRET,
+    TWITTER_ACCESS_TOKEN,
+    TWITTER_ACCESS_SECRET,
+)
+
 
 class TwitterConnect:
-    consumer_key = TWITTER_CONSUMER_KEY 
+    consumer_key = TWITTER_CONSUMER_KEY
     consumer_secret = TWITTER_CONSUMER_SECRET
     access_token = TWITTER_ACCESS_TOKEN
     access_token_secret = TWITTER_ACCESS_SECRET
@@ -12,7 +19,12 @@ class TwitterConnect:
         self.client = self.create_client()
 
     def create_client(self):
-        auth = tweepy.OAuth1UserHandler(self.consumer_key,self.consumer_secret,self.access_token, self.access_token_secret)
+        auth = tweepy.OAuth1UserHandler(
+            self.consumer_key,
+            self.consumer_secret,
+            self.access_token,
+            self.access_token_secret,
+        )
         client = tweepy.API(auth)
         return client
 
