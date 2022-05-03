@@ -24,3 +24,10 @@ class Image:
             if last_posted_image_date == None
             else self.date == last_posted_image_date
         )
+
+    def build_json(self):
+        return {
+            "name": self.name,
+            "date": self.date,
+            "url": self.url
+        }

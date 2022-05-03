@@ -13,10 +13,14 @@ class Storage:
             return json.loads(file.read())
 
     def write_to_history_file(self):
-        pass
+        with open(self.history_file, "w") as file:
+            data_string = json.dumps(self.data)
+            file.write(data_string)
     
     def get_last_image(self) -> Image:
         return Image(self.data[-1])
 
     def add_image(self, image: Image):
-        pass
+        self.data.append(image.build_json())
+        print(self.data)
+        self.write_to_history_file()
