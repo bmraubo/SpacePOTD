@@ -1,7 +1,8 @@
 from src.image import Image
 from src.storage import Storage
 import json
-from os.path import join
+from os import remove
+from os.path import join, exists
 
 history_file = join("tests", "mock_history.txt")
 
@@ -48,4 +49,8 @@ def test_can_write_to_history_file():
 
 
 def test_can_create_template_history_file_if_one_does_not_exist():
-    pass
+    new_history_file = join("tests", "another_file.txt")
+    storage = Storage(new_history_file)
+    assert exists(new_history_file)
+    assert storage.data == []
+    remove(new_history_file)
