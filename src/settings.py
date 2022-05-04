@@ -3,7 +3,7 @@ from os import getenv, path
 
 load_dotenv()
 
-HISTORY_FILE=path.join("data", "history.txt")
+HISTORY_FILE = path.join("data", "history.txt")
 
 # API KEYS
 NASA_API_KEY = getenv("NASA_API_KEY")

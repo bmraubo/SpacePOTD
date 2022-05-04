@@ -29,11 +29,13 @@ def set_up_bot():
     bot = Bot(nasa_connect, twitter_connect, storage)
     return bot
 
+
 def reset_history_file():
     data = [{"name": "Image Name", "date": "1111-11-11", "url": "www.example.com"}]
     with open(history_file, "w") as file:
         data_string = json.dumps(data)
         file.write(data_string)
+
 
 def test_bot_can_post_an_image():
     bot = set_up_bot()
