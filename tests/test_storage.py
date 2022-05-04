@@ -1,8 +1,9 @@
 from src.image import Image
 from src.storage import Storage
 import json
+from os.path import join
 
-history_file = "tests/test_history.txt"
+history_file = join("tests", "mock_history.txt")
 
 
 def set_up_image():

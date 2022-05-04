@@ -4,6 +4,7 @@ from src.twitter_connect import TwitterConnect
 from src.storage import Storage
 from src.bot import Bot
 from src.image import Image
+from os.path import join
 import json
 
 MOCK_NASA_API_DATA = {
@@ -17,7 +18,7 @@ MOCK_NASA_API_DATA = {
     "url": "https://apod.nasa.gov/apod/image/2205/PartialEclipse_Andrada_960.jpg",
 }
 
-history_file = "tests/test_history.txt"
+history_file = join("tests", "mock_history.txt")
 
 
 def set_up_bot():
