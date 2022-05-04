@@ -44,3 +44,7 @@ def test_can_write_to_history_file():
     assert last_image.date == "2022-05-02"
     assert last_image.url == "www.another-example.com"
     reset_history_file()
+
+
+def test_can_create_template_history_file_if_one_does_not_exist():
+    pass

@@ -7,10 +7,10 @@ from src.settings import HISTORY_FILE
 class Bot:
     wait_time = 10800
 
-    def __init__(self, nasa_connect, twitter_connect):
+    def __init__(self, nasa_connect, twitter_connect, storage):
         self.nasa_connect = nasa_connect
         self.twitter_connect = twitter_connect
-        self.storage = Storage(HISTORY_FILE)
+        self.storage = storage
 
     def get_image_data(self):
         print("Contacting NASA API")
