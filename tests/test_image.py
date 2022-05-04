@@ -1,13 +1,8 @@
 from src.image import Image
 
 MOCK_NASA_API_DATA = {
-    "copyright": "Aixa Andrada",
+    "name": "Partial Solar Eclipse over Argentina",
     "date": "2022-05-02",
-    "explanation": "An Explanation",
-    "hdurl": "https://apod.nasa.gov/apod/image/2205/PartialEclipse_Andrada_2048.jpg",
-    "media_type": "image",
-    "service_version": "v1",
-    "title": "Partial Solar Eclipse over Argentina",
     "url": "https://apod.nasa.gov/apod/image/2205/PartialEclipse_Andrada_960.jpg",
 }
 

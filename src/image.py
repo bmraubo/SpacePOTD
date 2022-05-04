@@ -6,7 +6,7 @@ class Image:
     ready = False
 
     def __init__(self, nasa_api_data):
-        self.name = nasa_api_data["title"]
+        self.name = nasa_api_data["name"]
         self.date = nasa_api_data["date"]
         self.url = nasa_api_data["url"]
 
@@ -24,3 +24,6 @@ class Image:
             if last_posted_image_date == None
             else self.date == last_posted_image_date
         )
+
+    def build_json(self):
+        return {"name": self.name, "date": self.date, "url": self.url}

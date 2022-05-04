@@ -1,8 +1,11 @@
 from dotenv import load_dotenv
-from os import getenv
+from os import getenv, path
 
 load_dotenv()
 
+HISTORY_FILE = path.join("data", "history.txt")
+
+# API KEYS
 NASA_API_KEY = getenv("NASA_API_KEY")
 TWITTER_CONSUMER_KEY = getenv("TWITTER_CONSUMER_KEY")
 TWITTER_CONSUMER_SECRET = getenv("TWITTER_CONSUMER_SECRET")
