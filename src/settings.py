@@ -4,6 +4,7 @@ from os import getenv, path
 load_dotenv()
 
 HISTORY_FILE = path.join("data", "history.txt")
+LOG_FILE = path.join("data", "spacepotd.log")
 
 # API KEYS
 NASA_API_KEY = getenv("NASA_API_KEY")

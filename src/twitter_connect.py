@@ -1,4 +1,5 @@
 import tweepy
+import logging
 from src.settings import (
     TWITTER_BEARER_TOKEN,
     TWITTER_CONSUMER_KEY,
@@ -29,13 +30,16 @@ class TwitterConnect:
         return client
 
     def post_text(self, text):
+        logging.info("posting update with text")
         response = self.client.update_status(status=text)
         return response
 
     def post_text_with_image(self, text, media_id):
+        logging.info("posting update with text and image")
         return self.client.update_status(status=text, media_ids=[str(media_id)])
 
     def upload_media(self, file_name, file):
+        logging.info("uploading media")
         return self.client.media_upload(filename=file_name, file=file)
 
     def delete_tweet(self, tweet_id):
