@@ -1,7 +1,6 @@
 import time
+import logging
 from .image import Image
-from src.storage import Storage
-from src.settings import HISTORY_FILE
 
 
 class Bot:
@@ -13,7 +12,6 @@ class Bot:
         self.storage = storage
 
     def get_image_data(self):
-        print("Contacting NASA API")
         return self.nasa_connect.get_data()
 
     def upload_media(self, image):
@@ -23,7 +21,7 @@ class Bot:
         return media_upload_response.media_id
 
     def post_image(self, image):
-        print("New Image - Posting")
+        logging.info("New Image - Posting")
         image.fetch_image()
         if image.ready:
             media_id = self.upload_media(image)
@@ -31,18 +29,18 @@ class Bot:
                 image.name, media_id
             )
             self.last_post_id = post_response._json["id"]
-            print("Image Posted")
+            logging.info("Image Posted")
             self.storage.add_image(image)
             return True
         else:
             return False
 
     def wait(self):
-        print("Waiting")
+        logging.info("waiting...")
         time.sleep(self.wait_time)
 
     def start(self):
-        print("Bot is starting")
+        logging.info("Bot is Starting")
         while True:
             nasa_api_response = self.get_image_data()
             image = Image(nasa_api_response)
@@ -51,5 +49,5 @@ class Bot:
                 self.post_image(image)
                 self.wait()
             else:
-                print("This image has already been posted")
+                logging.info("Image has already been posted")
                 self.wait()

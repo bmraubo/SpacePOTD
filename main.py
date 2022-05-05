@@ -1,13 +1,22 @@
 from src.twitter_connect import TwitterConnect
 from src.nasa_connect import NasaConnect, NasaApiClient
 from src.storage import Storage
-from src.settings import HISTORY_FILE
+from src.settings import HISTORY_FILE, LOG_FILE
 from src.bot import Bot
+import logging
 
-if __name__ == "__main__":
+def start_logging(log_file):
+    logging.basicConfig(filename=log_file, filemode="a", format="%(asctime)s %(levelname)s: %(message)s", level=logging.DEBUG)
+    logging.info("Logging...")
+
+def main():
+    start_logging(LOG_FILE)
     nasa_api_client = NasaApiClient()
     nasa_connect = NasaConnect(nasa_api_client)
     twitter_connect = TwitterConnect()
     storage = Storage(HISTORY_FILE)
     bot = Bot(nasa_connect, twitter_connect, storage)
     bot.start()
+
+if __name__ == "__main__":
+    main()

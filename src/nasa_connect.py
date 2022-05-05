@@ -1,12 +1,15 @@
 import requests
+import logging
 from .settings import NASA_API_KEY
 
 
 class NasaConnect:
     def __init__(self, api_client):
+        logging.info("Initializing Nasa Connect")
         self.api_client = api_client
 
     def get_data(self):
+        logging.info("Contacting NASA API")
         response_json = self.api_client.get_data()
         return {
             "name": response_json["title"],

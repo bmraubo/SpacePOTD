@@ -1,4 +1,5 @@
 import requests
+import logging
 from io import BytesIO
 
 
@@ -11,12 +12,13 @@ class Image:
         self.url = nasa_api_data["url"]
 
     def fetch_image(self):
+        logging.info("fetching image")
         try:
             response = requests.get(self.url)
             self.file = BytesIO(response.content)
             self.ready = True
         except:
-            print("Failed to fetch image")
+            logging.error("failed to fetch image")
 
     def has_been_posted(self, last_posted_image_date):
         return (
