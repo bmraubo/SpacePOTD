@@ -22,6 +22,7 @@ history_file = join("tests", "mock_history.txt")
 
 
 def set_up_bot():
+    reset_history_file()
     nasa_api_client = MockNasaApiClient()
     nasa_connect = NasaConnect(nasa_api_client)
     twitter_connect = TwitterConnect()
@@ -45,3 +46,14 @@ def test_bot_can_post_an_image():
     assert image.build_json() in bot.storage.data
     bot.twitter_connect.delete_tweet(bot.last_post_id)
     reset_history_file()
+
+def test_bot_can_respond_to_initial_post_with_description():
+    bot = set_up_bot()
+    image = Image(bot.nasa_connect.get_data())
+    bot.post_image(image)
+    response_posted = bot.respond_with_description(image)
+    assert response_posted == True;
+    bot.twitter_connect.delete_tweet(bot.last_post_id)
+    reset_history_file()
+
+

@@ -35,6 +35,14 @@ class Bot:
         else:
             return False
 
+    def respond_with_description(self, image):
+        try:
+            self.twitter_connect.respond_with_text(image.description, self.last_post_id)
+            return True
+        except Exception as e:
+            logging.critical(e)
+            return False
+
     def wait(self):
         logging.info("waiting...")
         time.sleep(self.wait_time)
