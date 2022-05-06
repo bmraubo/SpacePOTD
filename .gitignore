@@ -3,3 +3,5 @@ spacepotd_venv/*
 .env
 
 data/*
+
+*.pyc
