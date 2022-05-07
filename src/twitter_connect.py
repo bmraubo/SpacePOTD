@@ -8,8 +8,7 @@ from src.settings import (
     TWITTER_ACCESS_SECRET,
 )
 
-
-class TwitterConnect:
+class TwitterApiClient:
     consumer_key = TWITTER_CONSUMER_KEY
     consumer_secret = TWITTER_CONSUMER_SECRET
     access_token = TWITTER_ACCESS_TOKEN
@@ -18,6 +17,30 @@ class TwitterConnect:
 
     def __init__(self):
         self.client = self.create_client()
+
+    def create_client(self):
+        auth = tweepy.OAuth1UserHandler(
+            self.consumer_key,
+            self.consumer_secret,
+            self.access_token,
+            self.access_token_secret,
+        )
+        client = tweepy.API(auth)
+        return client
+
+    def update_status():
+        pass
+
+    def upload_media():
+        pass
+    
+    def destroy_status():
+        pass
+
+class TwitterConnect:
+
+    def __init__(self, client):
+        self.client = client
 
     def create_client(self):
         auth = tweepy.OAuth1UserHandler(

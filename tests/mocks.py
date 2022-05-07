@@ -10,3 +10,6 @@ class MockNasaApiClient:
             "title": "Partial Solar Eclipse over Argentina",
             "url": "https://apod.nasa.gov/apod/image/2205/PartialEclipse_Andrada_960.jpg",
         }
+
+class MockTwitterApiClient:
+    pass
