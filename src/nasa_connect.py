@@ -3,7 +3,7 @@ import logging
 from .settings import NASA_API_KEY
 
 
-class NasaConnect:
+class ImageService:
     def __init__(self, api_client):
         logging.info("Initializing Nasa Connect")
         self.api_client = api_client
@@ -18,7 +18,7 @@ class NasaConnect:
         }
 
 
-class NasaApiClient:
+class NasaAPIClient:
     base_url = "https://api.nasa.gov/planetary/apod"
     api_key = NASA_API_KEY
 

@@ -1,5 +1,5 @@
 from .mocks import MockNasaApiClient, MockTwitterApiClient
-from src.nasa_connect import NasaConnect
+from src.nasa_connect import ImageService
 from src.posting_service import PostingService
 from src.storage import Storage
 from src.bot import Bot
@@ -23,7 +23,7 @@ history_file = join("tests", "mock_history.txt")
 
 def set_up_bot():
     nasa_client = MockNasaApiClient()
-    nasa_connect = NasaConnect(nasa_client)
+    nasa_connect = ImageService(nasa_client)
     twitter_client = MockTwitterApiClient()
     twitter_connect = PostingService(twitter_client)
     storage = Storage(history_file)

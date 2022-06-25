@@ -1,5 +1,5 @@
 from src.posting_service import TwitterApiClient, PostingService
-from src.nasa_connect import NasaConnect, NasaApiClient
+from src.nasa_connect import ImageService, NasaApiClient
 from src.storage import Storage
 from src.settings import HISTORY_FILE, LOG_FILE
 from src.bot import Bot
@@ -12,7 +12,7 @@ def start_logging(log_file):
 def main():
     start_logging(LOG_FILE)
     nasa_api_client = NasaApiClient()
-    nasa_connect = NasaConnect(nasa_api_client)
+    nasa_connect = ImageService(nasa_api_client)
     twitter_api_client = TwitterApiClient()
     twitter_connect = PostingService(twitter_api_client)
     storage = Storage(HISTORY_FILE)

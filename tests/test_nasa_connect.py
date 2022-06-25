@@ -1,10 +1,10 @@
-from src.nasa_connect import NasaConnect
+from src.nasa_connect import ImageService
 from .mocks import MockNasaApiClient
 
 
 def test_can_obtain_title_and_url():
     api_client = MockNasaApiClient()
-    nasa_connect = NasaConnect(api_client)
+    nasa_connect = ImageService(api_client)
     nasa_connect_data = nasa_connect.get_data()
     assert nasa_connect_data["name"] == "Partial Solar Eclipse over Argentina"
     assert nasa_connect_data["date"] == "2022-05-02"
