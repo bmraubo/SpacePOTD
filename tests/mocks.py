@@ -1,4 +1,5 @@
 class MockNasaApiClient:
+
     def get_data(self):
         return {
             "copyright": "Aixa Andrada",
@@ -12,4 +13,16 @@ class MockNasaApiClient:
         }
 
 class MockTwitterApiClient:
-    pass
+
+    def update_status(self, status=None, media_ids=None):
+        return MockResponseObject()
+
+    def media_upload(self, filename=None, file=None):
+        return MockResponseObject()
+    
+    def destroy_status(self, tweet_id):
+        return True
+
+class MockResponseObject:
+    media_id = "1"
+    _json = {"id": media_id}
