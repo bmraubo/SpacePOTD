@@ -45,16 +45,6 @@ class TwitterConnect:
     def __init__(self, client):
         self.client = client
 
-    def create_client(self):
-        auth = tweepy.OAuth1UserHandler(
-            self.consumer_key,
-            self.consumer_secret,
-            self.access_token,
-            self.access_token_secret,
-        )
-        client = tweepy.API(auth)
-        return client
-
     def post_text(self, text):
         logging.info("posting update with text")
         return self.client.update_status(status=text)
