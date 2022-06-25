@@ -5,11 +5,11 @@ from .settings import NASA_API_KEY
 
 class ImageService:
     def __init__(self, api_client):
-        logging.info("Initializing Nasa Connect")
+        logging.info("Starting Image Service")
         self.api_client = api_client
 
     def get_data(self):
-        logging.info("Contacting NASA API")
+        logging.info("Fetching image data")
         response_json = self.api_client.get_data()
         return {
             "name": response_json["title"],
@@ -23,5 +23,6 @@ class NasaAPIClient:
     api_key = NASA_API_KEY
 
     def get_data(self):
+        logging.info("Contacting NASA API")
         response = requests.get(self.base_url, params={"api_key": self.api_key})
         return response.json()
