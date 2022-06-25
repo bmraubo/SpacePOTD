@@ -18,4 +18,4 @@ class PostingService:
         return self.client.upload_media(filename=file_name, file=file)
 
     def delete_tweet(self, tweet_id):
-        return self.client.destroy_status(tweet_id)
+        return self.client.delete_tweet(tweet_id)

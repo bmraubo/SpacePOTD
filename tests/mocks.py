@@ -22,7 +22,7 @@ class MockTwitterApiClient:
     def upload_media(self, filename=None, file=None):
         return MockResponseObject()
     
-    def destroy_status(self, tweet_id):
+    def delete_tweet(self, tweet_id):
         return MockResponseObject()
 
 class MockResponseObject:

@@ -29,5 +29,5 @@ class TwitterApiClient:
     def upload_media(self, filename, file):
         return self.client.media_upload(filename=filename, file=file)
     
-    def destroy_status(self, tweet_id):
+    def delete_tweet(self, tweet_id):
         return self.client.destroy_status(tweet_id)
