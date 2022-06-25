@@ -1,4 +1,4 @@
-from src.twitter_connect import PostingService
+from src.posting_service import PostingService
 from io import BytesIO
 import requests
 

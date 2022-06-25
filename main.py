@@ -1,4 +1,4 @@
-from src.twitter_connect import TwitterApiClient, PostingService
+from src.posting_service import TwitterApiClient, PostingService
 from src.nasa_connect import NasaConnect, NasaApiClient
 from src.storage import Storage
 from src.settings import HISTORY_FILE, LOG_FILE
