@@ -15,14 +15,16 @@ class MockNasaApiClient:
 class MockTwitterApiClient:
 
     def update_status(self, status=None, media_ids=None):
-        return MockResponseObject()
+        mock_response_object = MockResponseObject()
+        mock_response_object._json["text"] = status
+        return mock_response_object
 
     def media_upload(self, filename=None, file=None):
         return MockResponseObject()
     
     def destroy_status(self, tweet_id):
-        return True
+        return MockResponseObject()
 
 class MockResponseObject:
     media_id = "1"
-    _json = {"id": media_id}
+    _json = {"id": media_id, "text": "some text"}
