@@ -35,6 +35,7 @@ def test_can_get_last_image_data():
     assert last_image.name == "Image Name"
     assert last_image.date == "1111-11-11"
     assert last_image.url == "www.example.com"
+    reset_history_file()
 
 
 def test_can_write_to_history_file():
