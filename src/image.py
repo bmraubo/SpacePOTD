@@ -4,6 +4,7 @@ from io import BytesIO
 
 
 class Image:
+    data = None
     ready = False
 
     def __init__(self, nasa_api_data):
