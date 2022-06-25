@@ -1,4 +1,4 @@
-from src.twitter_connect import TwitterConnect
+from src.twitter_connect import TwitterApiClient, TwitterConnect
 from src.nasa_connect import NasaConnect, NasaApiClient
 from src.storage import Storage
 from src.settings import HISTORY_FILE, LOG_FILE
@@ -13,7 +13,8 @@ def main():
     start_logging(LOG_FILE)
     nasa_api_client = NasaApiClient()
     nasa_connect = NasaConnect(nasa_api_client)
-    twitter_connect = TwitterConnect()
+    twitter_api_client = TwitterApiClient()
+    twitter_connect = TwitterConnect(twitter_api_client)
     storage = Storage(HISTORY_FILE)
     bot = Bot(nasa_connect, twitter_connect, storage)
     bot.start()

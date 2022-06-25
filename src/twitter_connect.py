@@ -34,8 +34,8 @@ class TwitterApiClient:
         else:
             return self.client.update_status(status=status)
 
-    def media_upload(self, file_name, file):
-        return self.client.media_upload(filename=file_name, file=file)
+    def media_upload(self, filename, file):
+        return self.client.media_upload(filename=filename, file=file)
     
     def destroy_status(self, tweet_id):
         return self.client.destroy_status(tweet_id)
