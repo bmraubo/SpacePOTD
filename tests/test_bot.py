@@ -1,5 +1,5 @@
 from .mocks import MockNasaApiClient, MockTwitterApiClient
-from src.nasa_connect import ImageService
+from src.image_service import ImageService
 from src.posting_service import PostingService
 from src.storage import Storage
 from src.bot import Bot
