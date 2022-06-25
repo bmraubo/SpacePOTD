@@ -1,3 +1,4 @@
+from email.mime import image
 from .mocks import MockNasaApiClient, MockTwitterApiClient
 from src.image_service import ImageService
 from src.posting_service import PostingService
@@ -23,11 +24,11 @@ history_file = join("tests", "mock_history.txt")
 
 def set_up_bot():
     nasa_client = MockNasaApiClient()
-    nasa_connect = ImageService(nasa_client)
+    image_service = ImageService(nasa_client)
     twitter_client = MockTwitterApiClient()
-    twitter_connect = PostingService(twitter_client)
+    posting_service = PostingService(twitter_client)
     storage = Storage(history_file)
-    bot = Bot(nasa_connect, twitter_connect, storage)
+    bot = Bot(image_service, posting_service, storage)
     return bot
 
 
@@ -40,9 +41,9 @@ def reset_history_file():
 
 def test_bot_can_post_an_image():
     bot = set_up_bot()
-    image = Image(bot.nasa_connect.get_data())
+    image = bot.image_service.fetch_image()
     image_posted = bot.post_image(image)
     assert image_posted == True
     assert image.build_json() in bot.storage.data
-    bot.twitter_connect.delete_tweet(bot.last_post_id)
+    bot.posting_service.delete_tweet(bot.last_post_id)
     reset_history_file()

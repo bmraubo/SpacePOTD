@@ -16,7 +16,7 @@ class Image:
         logging.info("fetching image")
         try:
             response = requests.get(self.url)
-            self.file = BytesIO(response.content)
+            self.data = BytesIO(response.content)
             self.ready = True
         except:
             logging.error("failed to fetch image")

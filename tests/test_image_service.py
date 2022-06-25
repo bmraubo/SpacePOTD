@@ -5,7 +5,7 @@ from .mocks import MockNasaApiClient
 def test_can_obtain_title_date_and_url():
     client = MockNasaApiClient()
     image_service = ImageService(client)
-    image = image_service.get_data()
+    image = image_service.fetch_image()
     assert image.name == "Partial Solar Eclipse over Argentina"
     assert image.date == "2022-05-02"
     assert (
@@ -16,5 +16,5 @@ def test_can_obtain_title_date_and_url():
 def test_image_service_obtains_image():
     api_client = MockNasaApiClient()
     image_service = ImageService(api_client)
-    image = image_service.get_data()
+    image = image_service.fetch_image()
     assert image.data != None
