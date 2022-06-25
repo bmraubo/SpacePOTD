@@ -40,7 +40,7 @@ class TwitterApiClient:
     def destroy_status(self, tweet_id):
         return self.client.destroy_status(tweet_id)
 
-class TwitterConnect:
+class PostingService:
 
     def __init__(self, client):
         self.client = client
