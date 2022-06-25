@@ -1,5 +1,4 @@
 import tweepy
-import logging
 from src.settings import (
     TWITTER_BEARER_TOKEN,
     TWITTER_CONSUMER_KEY,
@@ -31,41 +30,10 @@ class TwitterApiClient:
     def update_status(self, status, media_ids=None):
         if media_ids != None:
             return self.client.update_status(status=status, media_ids=media_ids)
-        else:
-            return self.client.update_status(status=status)
+        return self.client.update_status(status=status)
 
-    def media_upload(self, filename, file):
+    def upload_media(self, filename, file):
         return self.client.media_upload(filename=filename, file=file)
     
     def destroy_status(self, tweet_id):
-        return self.client.destroy_status(tweet_id)
-
-class TwitterConnect:
-
-    def __init__(self, client):
-        self.client = client
-
-    def create_client(self):
-        auth = tweepy.OAuth1UserHandler(
-            self.consumer_key,
-            self.consumer_secret,
-            self.access_token,
-            self.access_token_secret,
-        )
-        client = tweepy.API(auth)
-        return client
-
-    def post_text(self, text):
-        logging.info("posting update with text")
-        return self.client.update_status(status=text)
-
-    def post_text_with_image(self, text, media_id):
-        logging.info("posting update with text and image")
-        return self.client.update_status(status=text, media_ids=[str(media_id)])
-
-    def upload_media(self, file_name, file):
-        logging.info("uploading media")
-        return self.client.media_upload(filename=file_name, file=file)
-
-    def delete_tweet(self, tweet_id):
         return self.client.destroy_status(tweet_id)
