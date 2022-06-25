@@ -19,7 +19,7 @@ class MockTwitterApiClient:
         mock_response_object._json["text"] = status
         return mock_response_object
 
-    def media_upload(self, filename=None, file=None):
+    def upload_media(self, filename=None, file=None):
         return MockResponseObject()
     
     def destroy_status(self, tweet_id):
