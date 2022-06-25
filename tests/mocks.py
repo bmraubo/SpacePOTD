@@ -26,5 +26,5 @@ class MockTwitterApiClient:
         return MockResponseObject()
 
 class MockResponseObject:
-    media_id = "1"
-    _json = {"id": media_id, "text": "some text"}
+    media_id = 1
+    _json = {"id": media_id, "text": "some text", "entities": {"media": [{"id": media_id}]}}
