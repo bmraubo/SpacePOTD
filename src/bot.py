@@ -6,6 +6,7 @@ class Bot:
     wait_time = 10800
 
     def __init__(self, image_service, posting_service, storage):
+        self.last_update_successful = False
         self.image_service = image_service
         self.posting_service = posting_service
         self.storage = storage
@@ -26,12 +27,25 @@ class Bot:
             post_response = self.posting_service.post_text_with_image(
                 image.name, media_id
             )
+            print(post_response)
             self.last_post_id = post_response._json["id"]
             logging.info("Image Posted")
             self.storage.add_image(image)
+            self.last_update_successful = True
             return True
         else:
             return False
+
+    def update(self):
+        self.last_update_successful = False
+        image = self.get_image_data()
+        last_image = self.storage.get_last_image()
+        print(image.has_been_posted(last_image.date))
+        if not image.has_been_posted(last_image.date):
+            self.post_image(image)
+        else:
+            logging.info("Image has already been posted")
+            
 
     def wait(self):
         logging.info("waiting...")
@@ -40,11 +54,5 @@ class Bot:
     def start(self):
         logging.info("Bot is Starting")
         while True:
-            image = self.get_image_data()
-            last_image = self.storage.get_last_image()
-            if not image.has_been_posted(last_image.date):
-                self.post_image(image)
-                self.wait()
-            else:
-                logging.info("Image has already been posted")
-                self.wait()
+            self.update()
+            self.wait()
