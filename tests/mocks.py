@@ -1,4 +1,5 @@
 class MockNasaApiClient:
+
     def get_data(self):
         return {
             "copyright": "Aixa Andrada",
@@ -10,3 +11,20 @@ class MockNasaApiClient:
             "title": "Partial Solar Eclipse over Argentina",
             "url": "https://apod.nasa.gov/apod/image/2205/PartialEclipse_Andrada_960.jpg",
         }
+
+class MockTwitterApiClient:
+
+    def update_status(self, status=None, media_ids=None):
+        mock_response_object = MockResponseObject()
+        mock_response_object._json["text"] = status
+        return mock_response_object
+
+    def media_upload(self, filename=None, file=None):
+        return MockResponseObject()
+    
+    def destroy_status(self, tweet_id):
+        return MockResponseObject()
+
+class MockResponseObject:
+    media_id = 1
+    _json = {"id": media_id, "text": "some text", "entities": {"media": [{"id": media_id}]}}
