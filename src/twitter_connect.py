@@ -31,7 +31,7 @@ class TwitterApiClient:
     def update_status():
         pass
 
-    def upload_media():
+    def media_upload():
         pass
     
     def destroy_status():
@@ -54,8 +54,7 @@ class TwitterConnect:
 
     def post_text(self, text):
         logging.info("posting update with text")
-        response = self.client.update_status(status=text)
-        return response
+        return self.client.update_status(status=text)
 
     def post_text_with_image(self, text, media_id):
         logging.info("posting update with text and image")
